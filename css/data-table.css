@@ -1,5 +1,6 @@
 .data-table {
   padding-inline: 2rem;
+  position: relative;
 }
 
 dialog {
@@ -174,18 +175,48 @@ dialog::backdrop {
 
 .success-message {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   position: absolute;
   width: 100%;
-  top: 1.5rem;
+  top: -0.5rem;
   right: 1.5rem;
-  max-width: 20rem;
-  padding: 1rem 1rem;
+  max-width: 18rem;
+  padding: 0.75rem 1rem;
   border-radius: 0.75rem;
   background-color: #d4edda;
   color: #155724;
   border-color: #c3e6cb;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.success-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-container {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-bottom-right-radius: 100vmax;
+  border-bottom-left-radius: 100vmax;
+  background-color: #d5d5d5;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 5px;
+  background-color: #4caf50;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  border-bottom-right-radius: 100vmax;
+  border-bottom-left-radius: 100vmax;
 }
 
 .heading {

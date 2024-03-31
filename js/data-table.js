@@ -118,14 +118,7 @@ class DataTable {
       p.addEventListener("click", () => {
         DataTable.#addCustomHeader(p.textContent, tableEl, tableBody);
 
-        const successMessageEl = document.getElementById("success-message");
-        const successMessageP = document.querySelector("#success-message p");
-        successMessageP.innerHTML = `'${p.textContent}' column added!`;
-        successMessageEl.style.display = "flex";
-
-        setTimeout(() => {
-          successMessageEl.style.display = "none";
-        }, 4000);
+        DataTable.toggleSuccessMessage(`'${p.textContent}' column added!`);
 
         customColumnsDropdownEl.style.display = "none";
         customColumnsButtonEl.classList.remove("columns-dropdown-button-hover");
@@ -150,14 +143,7 @@ class DataTable {
         } else {
           DataTable.#addCustomHeader(customColumnText, tableEl, tableBody);
 
-          const successMessageEl = document.getElementById("success-message");
-          const successMessageP = document.querySelector("#success-message p");
-          successMessageP.innerHTML = `'${customColumnText}' column added!`;
-          successMessageEl.style.display = "flex";
-
-          setTimeout(() => {
-            successMessageEl.style.display = "none";
-          }, 4000);
+          DataTable.toggleSuccessMessage(`'${customColumnText}' column added!`);
 
           customColumnError.innerHTML = "";
           customColumnsDropdownEl.style.display = "none";
@@ -307,6 +293,7 @@ class DataTable {
 
     DataTable.#updateLoggedInUser();
     DataTable.#updateUsers();
+    DataTable.toggleSuccessMessage("Product added successfully!");
     newProduct_id++;
   }
 
@@ -340,6 +327,7 @@ class DataTable {
     DataTable.#updateUserProducts(editedProduct);
     DataTable.#updateLoggedInUser();
     DataTable.#updateUsers();
+    DataTable.toggleSuccessMessage("Product updated successfully!");
   }
 
   static deleteProduct(product_id) {
@@ -350,6 +338,7 @@ class DataTable {
 
     DataTable.#updateLoggedInUser();
     DataTable.#updateUsers();
+    DataTable.toggleSuccessMessage("Product deleted successfully!");
   }
 
   // function to update logged in user in local storage
@@ -581,6 +570,34 @@ class DataTable {
     modalEl.querySelector("#modal-view-refill-limit p").innerHTML =
       product.refill_limit;
   }
+
+  // toggle success message
+  static toggleSuccessMessage(message, duration = 3500) {
+    const successMessageEl = document.getElementById("success-message");
+    const successMessageP = document.querySelector("#success-message p");
+    const progressBarEl = document.getElementById("progressBar");
+    successMessageP.innerHTML = message;
+    successMessageEl.style.display = "flex";
+
+    const startTime = new Date().getTime();
+
+    const id = setInterval(frame, 10);
+    function frame() {
+      const currentTime = new Date().getTime();
+      const elapsedTime = currentTime - startTime;
+      const progress = (elapsedTime / duration) * 100;
+
+      if (progress >= 100) {
+        clearInterval(id);
+      } else {
+        progressBarEl.style.width = progress + "%";
+      }
+    }
+
+    setTimeout(() => {
+      successMessageEl.style.display = "none";
+    }, duration + 500);
+  }
 }
 
 const table = new DataTable();
@@ -629,15 +646,25 @@ document
     document.getElementById("success-message").style.display = "none";
   });
 
-document.addEventListener("click", (e) => {
-  if (e.target.id !== "columns-dropdown-button") {
-    const columnsDropdownButtonEl = document.getElementById(
-      "columns-dropdown-button"
-    );
-    const columnsDropdownEl = document.querySelector(
-      ".columns-dropdown-content"
-    );
-    columnsDropdownEl.style.display = "none";
-    columnsDropdownButtonEl.classList.remove("columns-dropdown-button-hover");
-  }
+// document.addEventListener("click", (e) => {
+//   if (e.target.id !== "columns-dropdown-button") {
+//     const columnsDropdownButtonEl = document.getElementById(
+//       "columns-dropdown-button"
+//     );
+//     const columnsDropdownEl = document.querySelector(
+//       ".columns-dropdown-content"
+//     );
+//     columnsDropdownEl.style.display = "none";
+//     columnsDropdownButtonEl.classList.remove("columns-dropdown-button-hover");
+//   }
+// });
+
+const logoutEl = document.getElementById("logout");
+
+logoutEl.addEventListener("click", () => {
+  DataTable.toggleSuccessMessage("Logout Successful", 1500);
+  localStorage.removeItem("user-logged-in");
+  setTimeout(() => {
+    window.location.href = "/";
+  }, 1500);
 });
