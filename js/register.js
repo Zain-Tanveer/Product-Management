@@ -77,7 +77,7 @@ formEl.addEventListener("submit", (e) => {
     return;
   }
 
-  const user = { username, email, password };
+  const user = { username, email, password, products: [] };
   users.push(user);
 
   localStorage.setItem("users", JSON.stringify(users));

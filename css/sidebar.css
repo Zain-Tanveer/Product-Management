@@ -1,7 +1,12 @@
 .user-img {
-  width: 3.125rem;
-  border-radius: 100%;
-  border: 1px solid #eee;
+  width: 2.5rem;
+  font-size: 2.25rem;
+  border-radius: 10%;
+  margin-left: 0.5rem;
+}
+
+.sidebar.active .user-img {
+  margin-left: 0;
 }
 
 .sidebar {
@@ -11,8 +16,10 @@
   height: 100vh;
   width: 5rem;
   background-color: var(--clr-primary-300);
+  color: #adb5bd;
   padding: 0.4rem 0.8rem;
   transition: all 0.5s ease;
+  /* overflow-y: scroll; */
 }
 
 .sidebar.active ~ .main-content {
@@ -41,6 +48,7 @@
 
 .sidebar .top .logo {
   color: var(--clr-neutral-0);
+  font-weight: var(--fw-bold);
   display: flex;
   height: 3.125rem;
   align-items: center;
@@ -49,6 +57,7 @@
 }
 
 .sidebar .top .logo span {
+  font-size: 1rem;
   text-wrap: nowrap;
 }
 
@@ -56,10 +65,10 @@
   opacity: 1;
 }
 
-.top .logo i {
+/* .top .logo i {
   font-size: 1.75rem;
   margin-right: 0.313rem;
-}
+} */
 
 .user {
   display: flex;
@@ -68,13 +77,13 @@
 }
 
 .user p {
-  color: var(--clr-neutral-0);
   opacity: 1;
   margin-left: 1rem;
 }
 
 .bold {
   font-weight: var(--fw-bold);
+  color: #e9ecef;
 }
 
 .sidebar p {
@@ -95,7 +104,7 @@
 }
 
 .sidebar ul li a {
-  color: var(--clr-neutral-0);
+  color: #adb5bd;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -133,9 +142,11 @@
   line-height: 1.8rem;
   z-index: 200;
   opacity: 0;
+  background-color: white;
+  color: black;
 }
 
-.sidebar ul li:hover .tooltip {
+.sidebar ul li a:hover + .tooltip {
   opacity: 1;
 }
 
@@ -143,13 +154,8 @@
   display: none;
 }
 
-.main-content {
-  position: relative;
-  background-color: #eee;
-  min-height: 100vh;
-  top: 0;
-  left: 5rem;
-  transition: all 0.5s ease;
-  width: calc(100% - 5rem);
-  padding: 1rem;
+@media (max-width: 40em) {
+  .top i {
+    display: none;
+  }
 }

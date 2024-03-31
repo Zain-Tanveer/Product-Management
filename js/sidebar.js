@@ -1,6 +1,9 @@
 const sidebarBtn = document.querySelector("#sidebar-menu-btn");
 const sidebar = document.querySelector(".sidebar");
 
+const usernameEl = document.getElementById("sidebar-username");
+usernameEl.innerHTML = user.username;
+
 sidebarBtn.addEventListener("click", () => {
   sidebar.classList.toggle("active");
 });

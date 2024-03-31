@@ -86,7 +86,7 @@ formEl.addEventListener("submit", (e) => {
   responseMessageEl.style.display = "flex";
 
   setTimeout(() => {
-    // window.location.href = "/";
+    window.location.href = "/dashboard.html";
   }, 1000);
 });
 
