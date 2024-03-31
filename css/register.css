@@ -1,0 +1,93 @@
+main {
+  position: relative;
+}
+
+.primary-header {
+  background-color: var(--clr-primary-300);
+  padding-block: var(--p-header);
+  color: var(--clr-neutral-100);
+}
+
+.header-nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.primary-heading {
+  font-size: var(--fs-primary-heading);
+  font-weight: var(--fw-bold);
+}
+
+.primary-navigation {
+  margin-inline: var(--size-400);
+}
+
+.nav-list {
+  display: flex;
+  gap: var(--size-500);
+  font-weight: var(--fw-bold);
+}
+
+.nav-list a {
+  color: var(--clr-neutral-100);
+  text-decoration: none;
+}
+
+.register {
+  max-width: 30rem;
+  margin: auto;
+  margin-top: var(--size-600);
+}
+
+.register-text {
+  margin-bottom: var(--size-300);
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-300);
+  padding: var(--size-300);
+}
+
+.remember-control {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.remember-control label {
+  font-size: 0.875rem;
+}
+
+.checkbox {
+  width: fit-content !important;
+}
+
+.checkbox,
+.checkbox-label {
+  cursor: pointer;
+}
+
+.no-account {
+  margin-top: 1.5rem;
+}
+
+.no-account a {
+  color: rgb(59, 125, 221);
+  text-decoration: none;
+}
+
+.no-account a:hover {
+  text-decoration: underline;
+}
+
+.error {
+  font-size: 0.75rem;
+  color: var(--clr-error);
+  margin-left: 0.5rem;
+}
+
+.response-message {
+  top: -1.5rem;
+}
