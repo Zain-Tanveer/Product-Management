@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="css/data-table.css" />
   </head>
   <body>
+    <!-- sidebar  -->
     <div class="sidebar">
       <div class="top">
         <div class="logo">
@@ -107,6 +108,7 @@
       </ul>
     </div>
 
+    <!-- data table  -->
     <main class="main-content">
       <div class="header"></div>
       <div class="data-table">
@@ -174,7 +176,10 @@
                 </div>
               </div>
             </div>
-            <button class="toolbar-button add-product-button">
+            <button
+              class="toolbar-button add-product-button"
+              id="add-product-toolbar"
+            >
               <span>Add Product</span>
               <i class="bx bx-plus-medical"></i>
             </button>
@@ -307,7 +312,7 @@
                     </span>
                   </div>
                 </th>
-                <th data-id="product_location">
+                <th class="sortable" data-id="product_location">
                   <div class="sortable-wrapper">
                     <span class="sortable-heading" onselectstart="return false;"
                       >Address</span
@@ -326,6 +331,121 @@
         </div>
 
         <div id="selected-products" class="selected-products"></div>
+
+        <!-- modals -->
+
+        <dialog data-modal id="add-modal">
+          <div class="modal-header">
+            <h2>Add Product</h2>
+            <a class="modal-close" data-id="add-modal">
+              <i
+                class="fa fa-times"
+                style="font-size: 1.5rem; height: 1.5rem"
+              ></i>
+            </a>
+          </div>
+          <div>
+            <form class="modal-form" id="modal-add-form" method="post">
+              <label for="modal-add-name">
+                <span>Name</span>
+                <input type="text" id="modal-add-name" name="modal-add-name" />
+              </label>
+              <label for="modal-add-title">
+                <span>Title</span>
+                <input
+                  type="text"
+                  id="modal-add-title"
+                  name="modal-add-title"
+                />
+              </label>
+              <label for="modal-add-desc" class="modal-desc-label">
+                <span>Description</span>
+                <textarea id="modal-add-desc" name="modal-add-desc" rows="5">
+Enter description here...</textarea
+                >
+              </label>
+              <label for="modal-add-vendor">
+                <span>Vendor</span>
+                <input
+                  type="text"
+                  id="modal-add-vendor"
+                  name="modal-add-vendor"
+                />
+              </label>
+              <label for="modal-add-product-type">
+                <span>Product Type</span>
+                <input
+                  type="text"
+                  id="modal-add-product-type"
+                  name="modal-add-product-type"
+                />
+              </label>
+              <label for="modal-add-address" class="modal-address-label">
+                <span>Address</span>
+                <input
+                  type="text"
+                  id="modal-add-address"
+                  name="modal-add-address"
+                />
+              </label>
+              <label for="modal-add-in-stock">
+                <span>In Stock</span>
+                <input
+                  type="number"
+                  id="modal-add-in-stock"
+                  name="modal-add-in-stock"
+                />
+              </label>
+              <label for="modal-add-buying-price">
+                <span>Buying Price</span>
+                <input
+                  type="number"
+                  id="modal-add-buying-price"
+                  name="modal-add-buying-price"
+                />
+              </label>
+              <label for="modal-add-sale-price">
+                <span>Sale Price</span>
+                <input
+                  type="number"
+                  id="modal-add-sale-price"
+                  name="modal-add-sale-price"
+                />
+              </label>
+              <label for="modal-add-purchase-quantity">
+                <span>Purchase Quantity</span>
+                <input
+                  type="number"
+                  id="modal-add-purchase-quantity"
+                  name="modal-add-purchase-quantity"
+                />
+              </label>
+              <label for="modal-add-shipping-rates">
+                <span>Shipping Rates</span>
+                <input
+                  type="number"
+                  id="modal-add-shipping-rates"
+                  name="modal-add-shipping-rates"
+                />
+              </label>
+              <label for="modal-add-refill-limit">
+                <span>Refill Limit</span>
+                <input
+                  type="number"
+                  id="modal-add-refill-limit"
+                  name="modal-add-refill-limit"
+                />
+              </label>
+
+              <div class="modal-buttons">
+                <button type="cancel" class="cancel" formmethod="dialog">
+                  Cancel
+                </button>
+                <button type="submit" class="submit">Submit</button>
+              </div>
+            </form>
+          </div>
+        </dialog>
 
         <dialog data-modal id="view-modal">
           <div class="modal-header">
@@ -423,8 +543,11 @@
               </label>
               <label for="modal-edit-desc" class="modal-desc-label">
                 <span>Description</span>
-                <textarea id="modal-edit-desc" name="modal-edit-desc" rows="5">
-                </textarea>
+                <textarea
+                  id="modal-edit-desc"
+                  name="modal-edit-desc"
+                  rows="5"
+                ></textarea>
               </label>
               <label for="modal-edit-vendor">
                 <span>Vendor</span>

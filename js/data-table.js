@@ -1,11 +1,15 @@
 import { products } from "../utils/data.js";
 
+// user.products = [];
+// user.products = products;
 console.log(user.products);
+
+let newProduct_id = user.products[user.products.length - 1]?.id + 1 || 1;
+console.log(newProduct_id);
 
 class DataTable {
   // constructor
   constructor() {
-    this.filteredProducts = user.products;
     this.checkboxProducts = [];
     this.sortDirection = 1; // Sort direction: 1 for ascending, -1 for descending
     this.sortColumn = ""; // Column to sort
@@ -51,9 +55,7 @@ class DataTable {
         console.log(typeof product_id);
         if (checkbox.checked) {
           this.checkboxProducts.push(
-            this.filteredProducts.find(
-              (product) => product.id === parseInt(product_id)
-            )
+            user.products.find((product) => product.id === parseInt(product_id))
           );
           console.log(this.checkboxProducts);
           this.renderSelectProducts();
@@ -74,7 +76,7 @@ class DataTable {
       const searchValue = searchEl.value;
 
       if (searchValue !== "") {
-        const filterProducts = this.filteredProducts.filter((product) => {
+        const filterProducts = user.products.filter((product) => {
           if (typeof product[filterBy] === "string") {
             return product[filterBy]
               .toLowerCase()
@@ -165,47 +167,54 @@ class DataTable {
         }
       });
 
-    // for actions modal
-    document.querySelectorAll(".dropdown-content a").forEach((a) => {});
+    // for view modal
+    const addProductModal = document.getElementById("add-modal");
+    const formEl = document.getElementById("modal-add-form");
 
-    // for success message div
     document
-      .getElementById("success-message-cross")
+      .querySelector("#add-product-toolbar")
       .addEventListener("click", () => {
-        document.getElementById("success-message").style.display = "none";
+        addProductModal.showModal();
       });
+
+    formEl.addEventListener("submit", (e) => {
+      e.preventDefault();
+      this.addProduct(formEl);
+      addProductModal.close();
+      this.renderTable(user.products);
+    });
   }
 
   // function for rendering table
-  renderTable(products = this.filteredProducts) {
+  renderTable(products = user.products) {
     const tbodyEl = document.getElementById("table-body");
     tbodyEl.innerHTML = "";
 
     for (let [index, product] of products.entries()) {
-      const tr = document.createElement("tr");
+      let tr = document.createElement("tr");
       const checkboxEl = DataTable.#createCheckbox(product.id);
 
       tr.appendChild(checkboxEl);
 
-      for (let key in product) {
+      DataTable.#getTableHeaders().forEach((tableTh) => {
         const td = document.createElement("td");
-        td.textContent = product[key];
+        td.textContent = product[tableTh];
 
-        if (key === "title") {
+        if (tableTh === "title") {
           td.classList.add("title");
         }
-        if (key === "description") {
+        if (tableTh === "description") {
           td.classList.add("description");
         }
 
         tr.appendChild(td);
-      }
+      });
 
       const tableThLength = document.querySelectorAll(
         "#data-table thead tr th"
       ).length;
 
-      const lengthDiff = tableThLength - products.length;
+      const lengthDiff = tableThLength - (Object.keys(product).length + 2);
 
       if (lengthDiff) {
         for (let i = 0; i < lengthDiff; i++) {
@@ -217,10 +226,7 @@ class DataTable {
 
       let actionsTd;
 
-      if (
-        index > this.filteredProducts.length - 4 &&
-        this.filteredProducts.length > 6
-      ) {
+      if (index > user.products.length - 4 && user.products.length > 6) {
         actionsTd = DataTable.#createActions(true, product);
       } else {
         actionsTd = DataTable.#createActions(false, product);
@@ -249,7 +255,7 @@ class DataTable {
       this.sortDirection = -1;
     }
 
-    this.filteredProducts.sort((a, b) => {
+    user.products.sort((a, b) => {
       let valueA = a[column];
       let valueB = b[column];
 
@@ -269,6 +275,120 @@ class DataTable {
     });
 
     this.renderTable();
+  }
+
+  // function to add a product
+  addProduct(formEl) {
+    const newProduct = {};
+    newProduct.id = newProduct_id;
+    newProduct.name = formEl.querySelector("#modal-add-name").value || "";
+    newProduct.title = formEl.querySelector("#modal-add-title").value || "";
+    newProduct.vendor = formEl.querySelector("#modal-add-vendor").value || "";
+    newProduct.description =
+      formEl.querySelector("#modal-add-desc").value || "";
+    newProduct.in_stock =
+      parseInt(formEl.querySelector("#modal-add-in-stock").value) || 0;
+    newProduct.sale_price =
+      parseInt(formEl.querySelector("#modal-add-sale-price").value) || 0;
+    newProduct.product_type =
+      formEl.querySelector("#modal-add-product-type").value || "";
+    newProduct.product_location =
+      formEl.querySelector("#modal-add-address").value || "";
+    newProduct.buying_price =
+      parseInt(formEl.querySelector("#modal-add-buying-price").value) || 0;
+    newProduct.purchase_quantity =
+      parseInt(formEl.querySelector("#modal-add-purchase-quantity").value) || 0;
+    newProduct.shipping_rates =
+      parseInt(formEl.querySelector("#modal-add-shipping-rates").value) || 0;
+    newProduct.refill_limit =
+      parseInt(formEl.querySelector("#modal-add-refill-limit").value) || 0;
+
+    user.products.push(newProduct);
+
+    DataTable.#updateLoggedInUser();
+    DataTable.#updateUsers();
+    newProduct_id++;
+  }
+
+  static editProduct(formEl, product_id) {
+    const editedProduct = {};
+    editedProduct.id = parseInt(product_id);
+    editedProduct.name = formEl.querySelector("#modal-edit-name").value || "";
+    editedProduct.title = formEl.querySelector("#modal-edit-title").value || "";
+    editedProduct.vendor =
+      formEl.querySelector("#modal-edit-vendor").value || "";
+    editedProduct.description =
+      formEl.querySelector("#modal-edit-desc").value || "";
+    editedProduct.in_stock =
+      parseInt(formEl.querySelector("#modal-edit-in-stock").value) || 0;
+    editedProduct.sale_price =
+      parseInt(formEl.querySelector("#modal-edit-sale-price").value) || 0;
+    editedProduct.product_type =
+      formEl.querySelector("#modal-edit-product-type").value || "";
+    editedProduct.product_location =
+      formEl.querySelector("#modal-edit-address").value || "";
+    editedProduct.buying_price =
+      parseInt(formEl.querySelector("#modal-edit-buying-price").value) || 0;
+    editedProduct.purchase_quantity =
+      parseInt(formEl.querySelector("#modal-edit-purchase-quantity").value) ||
+      0;
+    editedProduct.shipping_rates =
+      parseInt(formEl.querySelector("#modal-edit-shipping-rates").value) || 0;
+    editedProduct.refill_limit =
+      parseInt(formEl.querySelector("#modal-edit-refill-limit").value) || 0;
+
+    DataTable.#updateUserProducts(editedProduct);
+    DataTable.#updateLoggedInUser();
+    DataTable.#updateUsers();
+  }
+
+  static deleteProduct(product_id) {
+    const updatedProducts = user.products.filter(
+      (prod) => prod.id !== product_id
+    );
+    user.products = updatedProducts;
+
+    DataTable.#updateLoggedInUser();
+    DataTable.#updateUsers();
+  }
+
+  // function to update logged in user in local storage
+  static #updateLoggedInUser() {
+    localStorage.setItem("user-logged-in", JSON.stringify(user));
+  }
+
+  // function to update users in local storage
+  static #updateUsers() {
+    const users = JSON.parse(localStorage.getItem("users"));
+    users.map((usr) => {
+      if (usr.email === user.email) {
+        usr = { ...user };
+      }
+    });
+    localStorage.setItem("users", JSON.stringify(users));
+  }
+
+  // function to update products of user
+  static #updateUserProducts(product) {
+    const updatedProducts = user.products.map((prod) => {
+      if (prod.id === product.id) {
+        return product;
+      }
+      return prod;
+    });
+
+    user.products = updatedProducts;
+  }
+
+  // function to get all table headers
+  static #getTableHeaders() {
+    let tableHeaders = Array.from(
+      document.querySelectorAll("#data-table thead tr th")
+    );
+    tableHeaders = tableHeaders.map((th) => th.dataset.id);
+    tableHeaders = tableHeaders.slice(1, -1);
+
+    return tableHeaders;
   }
 
   // function to add custom table header
@@ -359,39 +479,26 @@ class DataTable {
     deleteAnchor.setAttribute("data-modal", "delete-modal");
 
     // event listeners for anchors
+    const viewModalEl = document.getElementById(`${viewAnchor.dataset.modal}`);
+    const editModalEl = document.getElementById(`${editAnchor.dataset.modal}`);
+    const deleteModalEl = document.getElementById(
+      `${deleteAnchor.dataset.modal}`
+    );
+
     viewAnchor.addEventListener("click", () => {
-      const modalEl = document.getElementById(`${viewAnchor.dataset.modal}`);
-      DataTable.#viewModalData(modalEl, product);
-      modalEl.showModal();
-
-      const closeButton = modalEl.querySelector("#view-close-button");
-      closeButton.addEventListener("click", () => {
-        modalEl.close();
-      });
+      DataTable.#viewModalData(viewModalEl, product);
+      viewModalEl.showModal();
     });
+
     editAnchor.addEventListener("click", () => {
-      const modalEl = document.getElementById(`${editAnchor.dataset.modal}`);
-      DataTable.#addModalData(modalEl, product);
-      modalEl.showModal();
-
-      const formEl = modalEl.querySelector(`#modal-edit-form`);
-      formEl.addEventListener("submit", (e) => {
-        e.preventDefault();
-        modalEl.close();
-      });
+      DataTable.#addModalData(editModalEl, product);
+      editModalEl.setAttribute("data-product-id", product.id);
+      editModalEl.showModal();
     });
-    deleteAnchor.addEventListener("click", () => {
-      const modalEl = document.getElementById(`${deleteAnchor.dataset.modal}`);
-      modalEl.showModal();
 
-      const cancelButton = modalEl.querySelector("#delete-cancel-button");
-      cancelButton.addEventListener("click", () => {
-        modalEl.close();
-      });
-      const deleteButton = modalEl.querySelector("#delete-delete-button");
-      deleteButton.addEventListener("click", () => {
-        modalEl.close();
-      });
+    deleteAnchor.addEventListener("click", () => {
+      deleteModalEl.setAttribute("data-product-id", product.id);
+      deleteModalEl.showModal();
     });
 
     dropdownContentDiv.appendChild(viewAnchor);
@@ -433,7 +540,7 @@ class DataTable {
   static #addModalData(modalEl, product) {
     modalEl.querySelector("#modal-edit-name").value = product.name;
     modalEl.querySelector("#modal-edit-title").value = product.title;
-    modalEl.querySelector("#modal-edit-desc").innerHTML = product.description;
+    modalEl.querySelector("#modal-edit-desc").value = product.description;
     modalEl.querySelector("#modal-edit-vendor").value = product.vendor;
     modalEl.querySelector("#modal-edit-in-stock").value = product.in_stock;
     modalEl.querySelector("#modal-edit-sale-price").value = product.sale_price;
@@ -476,7 +583,7 @@ class DataTable {
   }
 }
 
-new DataTable();
+const table = new DataTable();
 
 const modalClose = document.querySelectorAll(".modal-close");
 modalClose.forEach((closeEl) => {
@@ -485,6 +592,42 @@ modalClose.forEach((closeEl) => {
     modalEl.close();
   });
 });
+
+const viewModalEl = document.getElementById(`view-modal`);
+const editModalEl = document.getElementById(`edit-modal`);
+const deleteModalEl = document.getElementById(`delete-modal`);
+
+const viewCloseButton = viewModalEl.querySelector("#view-close-button");
+viewCloseButton.addEventListener("click", () => {
+  viewModalEl.close();
+});
+
+const editFormEl = editModalEl.querySelector(`#modal-edit-form`);
+editFormEl.addEventListener("submit", (e) => {
+  e.preventDefault();
+  DataTable.editProduct(editFormEl, editModalEl.dataset.productId);
+  table.renderTable();
+  editModalEl.close();
+});
+
+const deleteCancelButton = deleteModalEl.querySelector("#delete-cancel-button");
+deleteCancelButton.addEventListener("click", () => {
+  deleteModalEl.close();
+});
+
+const deleteDeleteButton = deleteModalEl.querySelector("#delete-delete-button");
+deleteDeleteButton.addEventListener("click", () => {
+  DataTable.deleteProduct(parseInt(deleteModalEl.dataset.productId));
+  table.renderTable();
+  deleteModalEl.close();
+});
+
+// for success message div
+document
+  .getElementById("success-message-cross")
+  .addEventListener("click", () => {
+    document.getElementById("success-message").style.display = "none";
+  });
 
 document.addEventListener("click", (e) => {
   if (e.target.id !== "columns-dropdown-button") {
