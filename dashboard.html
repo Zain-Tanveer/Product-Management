@@ -190,6 +190,11 @@
           </div>
         </div>
         <div class="table-container">
+          <div class="no-products">
+            <p>Looks like you do not have any products.</p>
+            <a href="#" id="add-dummy-product">Add dummy product?</a>
+          </div>
+
           <table class="table" id="data-table">
             <thead>
               <tr>
@@ -353,6 +358,7 @@
               <label for="modal-add-name">
                 <span>Name</span>
                 <input type="text" id="modal-add-name" name="modal-add-name" />
+                <p class="modal-error" id="modal-add-name-error"></p>
               </label>
               <label for="modal-add-title">
                 <span>Title</span>
@@ -361,12 +367,19 @@
                   id="modal-add-title"
                   name="modal-add-title"
                 />
+                <p class="modal-error" id="modal-add-title-error"></p>
               </label>
               <label for="modal-add-desc" class="modal-desc-label">
                 <span>Description</span>
-                <textarea id="modal-add-desc" name="modal-add-desc" rows="5">
+                <textarea
+                  id="modal-add-desc"
+                  name="modal-add-desc"
+                  rows="5"
+                  maxlength="400"
+                >
 Enter description here...</textarea
                 >
+                <p class="modal-error" id="modal-add-desc-error"></p>
               </label>
               <label for="modal-add-vendor">
                 <span>Vendor</span>
@@ -375,6 +388,7 @@ Enter description here...</textarea
                   id="modal-add-vendor"
                   name="modal-add-vendor"
                 />
+                <p class="modal-error" id="modal-add-vendor-error"></p>
               </label>
               <label for="modal-add-product-type">
                 <span>Product Type</span>
@@ -383,6 +397,7 @@ Enter description here...</textarea
                   id="modal-add-product-type"
                   name="modal-add-product-type"
                 />
+                <p class="modal-error" id="modal-add-product-type-error"></p>
               </label>
               <label for="modal-add-address" class="modal-address-label">
                 <span>Address</span>
@@ -391,6 +406,7 @@ Enter description here...</textarea
                   id="modal-add-address"
                   name="modal-add-address"
                 />
+                <p class="modal-error" id="modal-add-address-error"></p>
               </label>
               <label for="modal-add-in-stock">
                 <span>In Stock</span>
@@ -398,6 +414,7 @@ Enter description here...</textarea
                   type="number"
                   id="modal-add-in-stock"
                   name="modal-add-in-stock"
+                  min="0"
                 />
               </label>
               <label for="modal-add-buying-price">
@@ -406,6 +423,7 @@ Enter description here...</textarea
                   type="number"
                   id="modal-add-buying-price"
                   name="modal-add-buying-price"
+                  min="0"
                 />
               </label>
               <label for="modal-add-sale-price">
@@ -414,6 +432,7 @@ Enter description here...</textarea
                   type="number"
                   id="modal-add-sale-price"
                   name="modal-add-sale-price"
+                  min="0"
                 />
               </label>
               <label for="modal-add-purchase-quantity">
@@ -422,6 +441,7 @@ Enter description here...</textarea
                   type="number"
                   id="modal-add-purchase-quantity"
                   name="modal-add-purchase-quantity"
+                  min="0"
                 />
               </label>
               <label for="modal-add-shipping-rates">
@@ -430,6 +450,7 @@ Enter description here...</textarea
                   type="number"
                   id="modal-add-shipping-rates"
                   name="modal-add-shipping-rates"
+                  min="0"
                 />
               </label>
               <label for="modal-add-refill-limit">
@@ -438,6 +459,7 @@ Enter description here...</textarea
                   type="number"
                   id="modal-add-refill-limit"
                   name="modal-add-refill-limit"
+                  min="0"
                 />
               </label>
 
@@ -536,6 +558,7 @@ Enter description here...</textarea
                   id="modal-edit-name"
                   name="modal-edit-name"
                 />
+                <p class="modal-error" id="modal-edit-name-error"></p>
               </label>
               <label for="modal-edit-title">
                 <span>Title</span>
@@ -544,6 +567,7 @@ Enter description here...</textarea
                   id="modal-edit-title"
                   name="modal-edit-title"
                 />
+                <p class="modal-error" id="modal-edit-title-error"></p>
               </label>
               <label for="modal-edit-desc" class="modal-desc-label">
                 <span>Description</span>
@@ -552,6 +576,7 @@ Enter description here...</textarea
                   name="modal-edit-desc"
                   rows="5"
                 ></textarea>
+                <p class="modal-error" id="modal-edit-desc-error"></p>
               </label>
               <label for="modal-edit-vendor">
                 <span>Vendor</span>
@@ -560,6 +585,7 @@ Enter description here...</textarea
                   id="modal-edit-vendor"
                   name="modal-edit-vendor"
                 />
+                <p class="modal-error" id="modal-edit-vendor-error"></p>
               </label>
               <label for="modal-edit-product-type">
                 <span>Product Type</span>
@@ -568,6 +594,7 @@ Enter description here...</textarea
                   id="modal-edit-product-type"
                   name="modal-edit-product-type"
                 />
+                <p class="modal-error" id="modal-edit-product-type-error"></p>
               </label>
               <label for="modal-edit-address" class="modal-address-label">
                 <span>Address</span>
@@ -576,6 +603,7 @@ Enter description here...</textarea
                   id="modal-edit-address"
                   name="modal-edit-address"
                 />
+                <p class="modal-error" id="modal-edit-address-error"></p>
               </label>
               <label for="modal-edit-in-stock">
                 <span>In Stock</span>
@@ -583,6 +611,7 @@ Enter description here...</textarea
                   type="number"
                   id="modal-edit-in-stock"
                   name="modal-edit-in-stock"
+                  min="0"
                 />
               </label>
               <label for="modal-edit-buying-price">
@@ -591,6 +620,7 @@ Enter description here...</textarea
                   type="number"
                   id="modal-edit-buying-price"
                   name="modal-edit-buying-price"
+                  min="0"
                 />
               </label>
               <label for="modal-edit-sale-price">
@@ -599,6 +629,7 @@ Enter description here...</textarea
                   type="number"
                   id="modal-edit-sale-price"
                   name="modal-edit-sale-price"
+                  min="0"
                 />
               </label>
               <label for="modal-edit-purchase-quantity">
@@ -607,6 +638,7 @@ Enter description here...</textarea
                   type="number"
                   id="modal-edit-purchase-quantity"
                   name="modal-edit-purchase-quantity"
+                  min="0"
                 />
               </label>
               <label for="modal-edit-shipping-rates">
@@ -615,6 +647,7 @@ Enter description here...</textarea
                   type="number"
                   id="modal-edit-shipping-rates"
                   name="modal-edit-shipping-rates"
+                  min="0"
                 />
               </label>
               <label for="modal-edit-refill-limit">
@@ -623,6 +656,7 @@ Enter description here...</textarea
                   type="number"
                   id="modal-edit-refill-limit"
                   name="modal-edit-refill-limit"
+                  min="0"
                 />
               </label>
 

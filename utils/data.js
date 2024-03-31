@@ -1,6 +1,6 @@
 export const products = [
   {
-    id: 1,
+    id: 0,
     name: "Laptop",
     title: "Dell XPS 15",
     description:

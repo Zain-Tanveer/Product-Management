@@ -1,11 +1,6 @@
 import { products } from "../utils/data.js";
 
-// user.products = [];
-// user.products = products;
-console.log(user.products);
-
 let newProduct_id = user.products[user.products.length - 1]?.id + 1 || 1;
-console.log(newProduct_id);
 
 class DataTable {
   // constructor
@@ -165,9 +160,14 @@ class DataTable {
 
     formEl.addEventListener("submit", (e) => {
       e.preventDefault();
-      this.addProduct(formEl);
-      addProductModal.close();
-      this.renderTable(user.products);
+      const isError = DataTable.validateFormInputs(formEl);
+      if (!isError) {
+        this.addProduct(formEl);
+        addProductModal.close();
+        this.renderTable();
+      } else {
+        addProductModal.scrollTop = 0;
+      }
     });
   }
 
@@ -175,6 +175,22 @@ class DataTable {
   renderTable(products = user.products) {
     const tbodyEl = document.getElementById("table-body");
     tbodyEl.innerHTML = "";
+
+    const tableContainer = document.querySelector(".table-container");
+    const actionsTh = tableContainer.querySelector(
+      "#data-table thead tr th.actionsTH"
+    );
+
+    const noProductsEl = document.querySelector(".no-products");
+    if (products.length === 0) {
+      tableContainer.style.overflow = "hidden";
+      actionsTh.style.position = "relative";
+      noProductsEl.style.display = "flex";
+    } else {
+      noProductsEl.style.display = "none";
+      tableContainer.style.overflow = "auto";
+      actionsTh.style.position = "sticky";
+    }
 
     for (let [index, product] of products.entries()) {
       let tr = document.createElement("tr");
@@ -291,8 +307,8 @@ class DataTable {
 
     user.products.push(newProduct);
 
-    DataTable.#updateLoggedInUser();
-    DataTable.#updateUsers();
+    DataTable.updateLoggedInUser();
+    DataTable.updateUsers();
     DataTable.toggleSuccessMessage("Product added successfully!");
     newProduct_id++;
   }
@@ -325,8 +341,8 @@ class DataTable {
       parseInt(formEl.querySelector("#modal-edit-refill-limit").value) || 0;
 
     DataTable.#updateUserProducts(editedProduct);
-    DataTable.#updateLoggedInUser();
-    DataTable.#updateUsers();
+    DataTable.updateLoggedInUser();
+    DataTable.updateUsers();
     DataTable.toggleSuccessMessage("Product updated successfully!");
   }
 
@@ -336,25 +352,26 @@ class DataTable {
     );
     user.products = updatedProducts;
 
-    DataTable.#updateLoggedInUser();
-    DataTable.#updateUsers();
+    DataTable.updateLoggedInUser();
+    DataTable.updateUsers();
     DataTable.toggleSuccessMessage("Product deleted successfully!");
   }
 
   // function to update logged in user in local storage
-  static #updateLoggedInUser() {
+  static updateLoggedInUser() {
     localStorage.setItem("user-logged-in", JSON.stringify(user));
   }
 
   // function to update users in local storage
-  static #updateUsers() {
+  static updateUsers() {
     const users = JSON.parse(localStorage.getItem("users"));
-    users.map((usr) => {
+    const updatedUsers = users.map((usr) => {
       if (usr.email === user.email) {
         usr = { ...user };
       }
+      return usr;
     });
-    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
   }
 
   // function to update products of user
@@ -571,7 +588,77 @@ class DataTable {
       product.refill_limit;
   }
 
-  // toggle success message
+  // function to validate form inputs
+  static validateFormInputs(formEl) {
+    const nameErr = formEl.querySelector('[id^="modal-"][id$="-name-error"]');
+    const titleErr = formEl.querySelector('[id^="modal-"][id$="-title-error"]');
+    const descErr = formEl.querySelector('[id^="modal-"][id$="-desc-error"]');
+    const vendorErr = formEl.querySelector(
+      '[id^="modal-"][id$="-vendor-error"]'
+    );
+    const productTypeErr = formEl.querySelector(
+      '[id^="modal-"][id$="-product-type-error"]'
+    );
+    const addressErr = formEl.querySelector(
+      '[id^="modal-"][id$="-address-error"]'
+    );
+
+    nameErr.textContent = "";
+    titleErr.textContent = "";
+    descErr.textContent = "";
+    vendorErr.textContent = "";
+    productTypeErr.textContent = "";
+    addressErr.textContent = "";
+
+    let isError = false;
+
+    const name = formEl.querySelector('[id^="modal-"][id$="-name"]').value;
+    if (name.length < 3) {
+      nameErr.textContent = "Name should have at least 3 characters";
+      isError = true;
+    }
+
+    const title = formEl.querySelector('[id^="modal-"][id$="-title"]').value;
+    if (title.length < 3) {
+      titleErr.textContent = "Title should have at least 3 characters";
+      isError = true;
+    }
+
+    const description = formEl.querySelector(
+      '[id^="modal-"][id$="-desc"]'
+    ).value;
+    if (description.length < 3) {
+      descErr.textContent = "Description should have at least 3 characters";
+      isError = true;
+    }
+
+    const vendor = formEl.querySelector('[id^="modal-"][id$="-vendor"]').value;
+    if (vendor.length < 3) {
+      vendorErr.textContent = "Vendor should have at least 3 characters";
+      isError = true;
+    }
+
+    const product_type = formEl.querySelector(
+      '[id^="modal-"][id$="-product-type"]'
+    ).value;
+    if (product_type.length < 3) {
+      productTypeErr.textContent =
+        "Product type should have at least 3 characters";
+      isError = true;
+    }
+
+    const address = formEl.querySelector(
+      '[id^="modal-"][id$="-address"]'
+    ).value;
+    if (address.length < 3) {
+      addressErr.textContent = "Address should have at least 3 characters";
+      isError = true;
+    }
+
+    return isError;
+  }
+
+  // function toggle success message
   static toggleSuccessMessage(message, duration = 3500) {
     const successMessageEl = document.getElementById("success-message");
     const successMessageP = document.querySelector("#success-message p");
@@ -622,9 +709,15 @@ viewCloseButton.addEventListener("click", () => {
 const editFormEl = editModalEl.querySelector(`#modal-edit-form`);
 editFormEl.addEventListener("submit", (e) => {
   e.preventDefault();
-  DataTable.editProduct(editFormEl, editModalEl.dataset.productId);
-  table.renderTable();
-  editModalEl.close();
+
+  const isError = DataTable.validateFormInputs(editFormEl);
+  if (!isError) {
+    DataTable.editProduct(editFormEl, editModalEl.dataset.productId);
+    table.renderTable();
+    editModalEl.close();
+  } else {
+    addProductModal.scrollTop = 0;
+  }
 });
 
 const deleteCancelButton = deleteModalEl.querySelector("#delete-cancel-button");
@@ -637,6 +730,15 @@ deleteDeleteButton.addEventListener("click", () => {
   DataTable.deleteProduct(parseInt(deleteModalEl.dataset.productId));
   table.renderTable();
   deleteModalEl.close();
+});
+
+// for dummy product
+document.getElementById("add-dummy-product").addEventListener("click", (e) => {
+  user.products.push(products[0]);
+  table.renderTable();
+  DataTable.updateLoggedInUser();
+  DataTable.updateUsers();
+  DataTable.toggleSuccessMessage("Product added successfully!");
 });
 
 // for success message div

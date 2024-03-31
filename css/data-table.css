@@ -45,6 +45,11 @@ dialog::backdrop {
   opacity: 0.8;
 }
 
+.modal-error {
+  color: #dc3545;
+  font-size: 0.75rem;
+}
+
 .view-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -368,12 +373,27 @@ dialog::backdrop {
 }
 
 .table-container {
+  position: relative;
   overflow: auto;
   height: 100vh;
   max-height: 65vh;
   margin-block: 1.25rem;
   background-color: white;
   box-shadow: 0 0 0.875rem 0 rgba(33, 37, 41, 0.05);
+}
+
+.no-products {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 300;
 }
 
 table {
