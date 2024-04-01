@@ -218,6 +218,15 @@ body {
   background-color: #a1323d;
 }
 
+@media (max-width: 32em) {
+  .response-message {
+    max-width: 15rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+}
+
 /* Utility Classes */
 .visually-hidden {
   position: absolute;
