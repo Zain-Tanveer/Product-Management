@@ -150,3 +150,10 @@ function toggleErrorMessage(message, duration = 3500) {
     progressBarEl.classList.remove("error-bar");
   }, duration + 500);
 }
+
+const mobileNavToggleEl = document.querySelector(".mobile-nav-toggle");
+
+mobileNavToggleEl.addEventListener("click", () => {
+  const mobileNavWrapperEl = document.querySelector(".mobile-nav-wrapper");
+  mobileNavWrapperEl.toggleAttribute("data-visible");
+});
