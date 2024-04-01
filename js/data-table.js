@@ -309,6 +309,7 @@ class DataTable {
 
     DataTable.updateLoggedInUser();
     DataTable.updateUsers();
+    DataTable.#emptyAddProducts(formEl);
     DataTable.toggleSuccessMessage("Product added successfully!");
     newProduct_id++;
   }
@@ -355,6 +356,21 @@ class DataTable {
     DataTable.updateLoggedInUser();
     DataTable.updateUsers();
     DataTable.toggleSuccessMessage("Product deleted successfully!");
+  }
+
+  static #emptyAddProducts(formEl) {
+    formEl.querySelector("#modal-add-name").value = "";
+    formEl.querySelector("#modal-add-title").value = "";
+    formEl.querySelector("#modal-add-vendor").value = "";
+    formEl.querySelector("#modal-add-desc").value = "";
+    formEl.querySelector("#modal-add-in-stock").value = "";
+    formEl.querySelector("#modal-add-sale-price").value = "";
+    formEl.querySelector("#modal-add-product-type").value = "";
+    formEl.querySelector("#modal-add-address").value = "";
+    formEl.querySelector("#modal-add-buying-price").value = "";
+    formEl.querySelector("#modal-add-purchase-quantity").value = "";
+    formEl.querySelector("#modal-add-shipping-rates").value = "";
+    formEl.querySelector("#modal-add-refill-limit").value = "";
   }
 
   // function to update logged in user in local storage
