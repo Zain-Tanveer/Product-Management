@@ -51,28 +51,12 @@ formEl.addEventListener("submit", (e) => {
 
   const user = users.find((user) => user.email === email);
   if (!user) {
-    responseMessageEl.classList.add("error-message");
-    responseMessageEl.querySelector("p").innerHTML = "User not found!";
-    responseMessageEl.style.display = "flex";
-
-    setTimeout(() => {
-      responseMessageEl.style.display = "none";
-      responseMessageEl.classList.remove("error-message");
-    }, 4000);
-
+    toggleErrorMessage("User not found!");
     return;
   }
 
   if (password !== user.password) {
-    responseMessageEl.classList.add("error-message");
-    responseMessageEl.querySelector("p").innerHTML = "Incorrect user password!";
-    responseMessageEl.style.display = "flex";
-
-    setTimeout(() => {
-      responseMessageEl.style.display = "none";
-      responseMessageEl.classList.remove("error-message");
-    }, 4000);
-
+    toggleErrorMessage("Incorrect user password!");
     return;
   }
 
@@ -81,9 +65,7 @@ formEl.addEventListener("submit", (e) => {
   emailEl.value = "";
   passwordEl.value = "";
 
-  responseMessageEl.classList.add("success-message");
-  responseMessageEl.querySelector("p").innerHTML = "Login successful!";
-  responseMessageEl.style.display = "flex";
+  toggleSuccessMessage("Login successful!", 1000);
 
   setTimeout(() => {
     window.location.href = "/dashboard.html";
@@ -93,3 +75,65 @@ formEl.addEventListener("submit", (e) => {
 document.getElementById("message-cross").addEventListener("click", () => {
   responseMessageEl.style.display = "none";
 });
+
+function toggleSuccessMessage(message, duration = 3500) {
+  const successMessageEl = document.getElementById("response-message");
+  const successMessageP = document.querySelector("#response-message p");
+  const progressBarEl = document.getElementById("progressBar");
+  successMessageP.innerHTML = message;
+  successMessageEl.style.display = "flex";
+  successMessageEl.classList.add("success-message");
+  progressBarEl.classList.add("success-bar");
+
+  const startTime = new Date().getTime();
+
+  const id = setInterval(frame, 10);
+  function frame() {
+    const currentTime = new Date().getTime();
+    const elapsedTime = currentTime - startTime;
+    const progress = (elapsedTime / duration) * 100;
+
+    if (progress >= 100) {
+      clearInterval(id);
+    } else {
+      progressBarEl.style.width = progress + "%";
+    }
+  }
+
+  setTimeout(() => {
+    successMessageEl.style.display = "none";
+    successMessageEl.classList.remove("success-message");
+    progressBarEl.classList.remove("success-bar");
+  }, duration + 500);
+}
+
+function toggleErrorMessage(message, duration = 3500) {
+  const errorMessageEl = document.getElementById("response-message");
+  const errorMessageP = document.querySelector("#response-message p");
+  const progressBarEl = document.getElementById("progressBar");
+  errorMessageP.innerHTML = message;
+  errorMessageEl.style.display = "flex";
+  errorMessageEl.classList.add("error-message");
+  progressBarEl.classList.add("error-bar");
+
+  const startTime = new Date().getTime();
+
+  const id = setInterval(frame, 10);
+  function frame() {
+    const currentTime = new Date().getTime();
+    const elapsedTime = currentTime - startTime;
+    const progress = (elapsedTime / duration) * 100;
+
+    if (progress >= 100) {
+      clearInterval(id);
+    } else {
+      progressBarEl.style.width = progress + "%";
+    }
+  }
+
+  setTimeout(() => {
+    errorMessageEl.style.display = "none";
+    errorMessageEl.classList.remove("error-message");
+    progressBarEl.classList.remove("error-bar");
+  }, duration + 500);
+}

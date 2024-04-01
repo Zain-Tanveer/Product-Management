@@ -158,15 +158,22 @@ body {
 
 .response-message {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   position: absolute;
   width: 100%;
-  top: 1.5rem;
+  top: -0.5rem;
   right: 1.5rem;
-  max-width: 20rem;
-  padding: 1rem 1rem;
+  max-width: 18rem;
+  padding: 0.75rem 1rem;
   border-radius: 0.75rem;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.response-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .success-message {
@@ -179,6 +186,36 @@ body {
   color: #721c24;
   background-color: #f8d7da;
   border-color: #f5c6cb;
+}
+
+.progress-container {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-bottom-right-radius: 100vmax;
+  border-bottom-left-radius: 100vmax;
+  background-color: #d5d5d5;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 5px;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  border-bottom-right-radius: 100vmax;
+  border-bottom-left-radius: 100vmax;
+}
+
+.success-bar {
+  background-color: #4caf50;
+}
+
+.error-bar {
+  background-color: #a1323d;
 }
 
 /* Utility Classes */
