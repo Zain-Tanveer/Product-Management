@@ -141,13 +141,18 @@
   padding: 0.4rem 1.2rem;
   line-height: 1.8rem;
   z-index: 200;
-  opacity: 0;
+  /* opacity: 0; */
+  display: none;
   background-color: white;
   color: black;
 }
 
 .sidebar ul li a:hover + .tooltip {
-  opacity: 1;
+  display: initial;
+}
+
+.sidebar.active ul li a:hover + .tooltip {
+  display: none;
 }
 
 .sidebar.active ul li .tooltip {
