@@ -393,6 +393,7 @@ dialog::backdrop {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  text-align: center;
   z-index: 300;
 }
 

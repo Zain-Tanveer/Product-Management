@@ -177,19 +177,19 @@ class DataTable {
     tbodyEl.innerHTML = "";
 
     const tableContainer = document.querySelector(".table-container");
-    const actionsTh = tableContainer.querySelector(
-      "#data-table thead tr th.actionsTH"
-    );
+    // const actionsTh = tableContainer.querySelector(
+    //   "#data-table thead tr th.actionsTH"
+    // );
 
     const noProductsEl = document.querySelector(".no-products");
     if (products.length === 0) {
       tableContainer.style.overflow = "hidden";
-      actionsTh.style.position = "relative";
+      // actionsTh.style.position = "relative";
       noProductsEl.style.display = "flex";
     } else {
       noProductsEl.style.display = "none";
       tableContainer.style.overflow = "auto";
-      actionsTh.style.position = "sticky";
+      // actionsTh.style.position = "sticky";
     }
 
     for (let [index, product] of products.entries()) {

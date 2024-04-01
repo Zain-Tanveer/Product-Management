@@ -35,7 +35,8 @@ main {
 .nav-list a {
   color: var(--clr-neutral-100);
   text-decoration: none;
-  padding: 2.2rem 1.5rem;
+  padding: 1.9rem 1.5rem;
+  padding-bottom: 1.8rem;
   transition: all 0.15s ease;
 }
 
@@ -99,12 +100,16 @@ main {
   top: -3.5rem;
 }
 
+.primary-header {
+  height: 5rem;
+}
+
 .header-nav-wrapper {
   position: relative;
 }
 
 .mobile-nav-wrapper {
-  display: none;
+  opacity: 0;
 }
 
 .mobile-nav li {
@@ -131,7 +136,7 @@ main {
   line-height: 0;
 }
 
-@media (max-width: 32em) {
+@media (max-width: 40em) {
   .primary-heading {
     font-size: 1.2rem;
   }
@@ -141,7 +146,11 @@ main {
   }
 
   .mobile-nav-wrapper[data-visible] {
-    display: initial;
+    opacity: 1;
+  }
+
+  .primary-header[data-visible] {
+    height: 11.45rem;
   }
 
   .mobile-nav-toggle {

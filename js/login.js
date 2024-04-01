@@ -143,4 +143,7 @@ const mobileNavToggleEl = document.querySelector(".mobile-nav-toggle");
 mobileNavToggleEl.addEventListener("click", () => {
   const mobileNavWrapperEl = document.querySelector(".mobile-nav-wrapper");
   mobileNavWrapperEl.toggleAttribute("data-visible");
+
+  const primaryHeader = document.querySelector(".primary-header");
+  primaryHeader.toggleAttribute("data-visible");
 });
