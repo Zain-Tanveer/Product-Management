@@ -81,7 +81,7 @@ formEl.addEventListener("submit", (e) => {
   toggleSuccessMessage("Registration successful!");
 
   setTimeout(() => {
-    window.location.href = "/";
+    window.location.href = "index.html";
   }, 1000);
 });
 

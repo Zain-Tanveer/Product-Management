@@ -783,6 +783,6 @@ logoutEl.addEventListener("click", () => {
   DataTable.toggleSuccessMessage("Logout Successful", 1500);
   localStorage.removeItem("user-logged-in");
   setTimeout(() => {
-    window.location.href = "/";
+    window.location.href = "index.html";
   }, 1500);
 });

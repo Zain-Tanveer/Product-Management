@@ -68,7 +68,7 @@ formEl.addEventListener("submit", (e) => {
   toggleSuccessMessage("Login successful!", 1000);
 
   setTimeout(() => {
-    window.location.href = "/dashboard.html";
+    window.location.href = "dashboard.html";
   }, 1000);
 });
 
