@@ -21,6 +21,11 @@
   transition: all 0.5s ease;
 }
 
+.sidebar.active .user-info {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 .sidebar.active ~ .main-content {
   left: 17.5rem;
   width: calc(100% - 17.5rem);
@@ -84,8 +89,10 @@
   opacity: 0;
 }
 
-.sidebar.sidebar.active p {
+.sidebar.active p {
   opacity: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sidebar ul li {
