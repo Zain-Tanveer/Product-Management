@@ -152,6 +152,11 @@ class DataTable {
     const addProductModal = document.getElementById("add-modal");
     const formEl = document.getElementById("modal-add-form");
 
+    const addCloseButton = addProductModal.querySelector("#add-close-button");
+    addCloseButton.addEventListener("click", () => {
+      addProductModal.close();
+    });
+
     document
       .querySelector("#add-product-toolbar")
       .addEventListener("click", () => {
@@ -240,6 +245,7 @@ class DataTable {
     }
   }
 
+  // function to render selected products
   renderSelectProducts() {
     const selectedProductsDiv = document.getElementById("selected-products");
     selectedProductsDiv.innerHTML = "";
@@ -314,6 +320,7 @@ class DataTable {
     newProduct_id++;
   }
 
+  // function to edit product
   static editProduct(formEl, product_id) {
     const editedProduct = {};
     editedProduct.id = parseInt(product_id);
@@ -347,6 +354,7 @@ class DataTable {
     DataTable.toggleSuccessMessage("Product updated successfully!");
   }
 
+  // function to delete product
   static deleteProduct(product_id) {
     const updatedProducts = user.products.filter(
       (prod) => prod.id !== product_id
@@ -720,6 +728,11 @@ const deleteModalEl = document.getElementById(`delete-modal`);
 const viewCloseButton = viewModalEl.querySelector("#view-close-button");
 viewCloseButton.addEventListener("click", () => {
   viewModalEl.close();
+});
+
+const editCloseButton = editModalEl.querySelector("#edit-close-button");
+editCloseButton.addEventListener("click", () => {
+  editModalEl.close();
 });
 
 const editFormEl = editModalEl.querySelector(`#modal-edit-form`);

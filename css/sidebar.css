@@ -159,9 +159,35 @@
   display: none;
 }
 
+@media (max-height: 40em) {
+  .top {
+    display: none;
+  }
+}
+
 @media (max-width: 40em) {
   .top i {
     display: none;
+  }
+}
+
+@media (max-width: 26em) {
+  .sidebar {
+    width: 3.5rem;
+  }
+  .user-img {
+    width: 1.925rem;
+    font-size: 1.925rem;
+    margin-left: 0;
+  }
+  .sidebar ul li {
+    width: 100%;
+  }
+  .sidebar ul li a {
+    border-radius: 0.6rem;
+  }
+  .sidebar ul li a i {
+    min-width: 1.925rem;
   }
 }
 

@@ -1,4 +1,5 @@
 .data-table {
+  height: 85%;
   padding-inline: 2rem;
   position: relative;
 }
@@ -375,8 +376,8 @@ dialog::backdrop {
 .table-container {
   position: relative;
   overflow: auto;
-  height: 100vh;
-  max-height: 65vh;
+  height: 100%;
+  max-height: 64vh;
   margin-block: 1.25rem;
   background-color: white;
   box-shadow: 0 0 0.875rem 0 rgba(33, 37, 41, 0.05);
@@ -614,6 +615,18 @@ tr:hover td.fixed-column {
   margin-block: 0.75rem;
 }
 
+@media (min-height: 58em) {
+  .table-container {
+    max-height: calc(100vh - 10rem);
+  }
+}
+
+@media (max-height: 40em) {
+  .table-container {
+    max-height: 280px;
+  }
+}
+
 @media (max-width: 67em) {
   .toolbar {
     flex-direction: column;
@@ -662,15 +675,34 @@ tr:hover td.fixed-column {
 }
 
 @media (max-width: 28em) {
+  .data-table {
+    padding-inline: 1.2rem;
+  }
   .heading {
     font-size: 1.2rem;
   }
-
   .actionsTH {
     position: relative;
   }
   .actions {
     position: relative;
+  }
+  .fixed-column {
+    padding-inline: 0.2rem;
+  }
+
+  .columns-dropdown-content {
+    right: 1rem;
+  }
+
+  .success-message {
+    max-width: 70vw;
+  }
+
+  .delete-modal-text {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
   }
 }
 
