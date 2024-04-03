@@ -11,6 +11,7 @@ dialog {
   max-width: 40rem;
   width: calc(100% - 1rem);
   color: inherit;
+  scroll-behavior: smooth;
 }
 
 dialog::backdrop {
@@ -309,7 +310,7 @@ dialog::backdrop {
   position: absolute;
   right: 3rem;
   top: 2.5rem;
-  z-index: 100;
+  z-index: 1000;
   padding: 0.5rem;
   background-color: white;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
@@ -541,6 +542,7 @@ tr:hover td.actions {
 
 .description {
   max-width: 21rem;
+  transition: all 0.3s ease;
 }
 
 tr:hover {
