@@ -53,8 +53,7 @@ class AuthService {
       usernameErrorEl.innerHTML = "username should have at least 3 characters";
       error = true;
     } else if (!usernamePattern.test(username)) {
-      usernameErrorEl.innerHTML =
-        "username can only contain letters, numbers, and underscores";
+      usernameErrorEl.innerHTML = "username can only contain letters, numbers, and underscores";
       error = true;
     }
 

@@ -18,9 +18,7 @@ class DashboardProductsService {
 
     fields.forEach((field) => {
       const err = formEl.querySelector(`[id^="modal-"][id$="-${field}-error"]`);
-      const inputElValue = formEl.querySelector(
-        `[id^="modal-"][id$="-${field}"]`
-      ).value;
+      const inputElValue = formEl.querySelector(`[id^="modal-"][id$="-${field}"]`).value;
 
       if (inputElValue.length < 3) {
         field = `${field.charAt(0).toUpperCase()}${field.slice(1)}`;
@@ -37,14 +35,7 @@ class DashboardProductsService {
   validateModalFormInputs(formEl) {
     this.#setErrorText(formEl);
 
-    const errsFields = [
-      "name",
-      "title",
-      "desc",
-      "vendor",
-      "product-type",
-      "address",
-    ];
+    const errsFields = ["name", "title", "desc", "vendor", "product-type", "address"];
 
     return this.#checkInputError(formEl, errsFields);
   }
@@ -73,9 +64,7 @@ class DashboardProductsService {
 
   // function to check for length difference when user adds custom columns
   checkLengthDifference(product) {
-    const tableThLength = document.querySelectorAll(
-      "#data-table thead tr th"
-    ).length;
+    const tableThLength = document.querySelectorAll("#data-table thead tr th").length;
 
     return tableThLength - (Object.keys(product).length + 2);
   }
@@ -83,9 +72,7 @@ class DashboardProductsService {
   // function to get all table headers that have data.
   // it will ignore the checkbox and actions column
   getTableHeaders() {
-    let tableHeaders = Array.from(
-      document.querySelectorAll("#data-table thead tr th")
-    );
+    let tableHeaders = Array.from(document.querySelectorAll("#data-table thead tr th"));
     tableHeaders = tableHeaders.map((th) => th.dataset.id);
     tableHeaders = tableHeaders.slice(1, -1);
 
@@ -97,50 +84,25 @@ class DashboardProductsService {
     const product = {};
 
     product.id = parseInt(product_id);
-    product.name =
-      formEl.querySelector('[id^="modal-"][id$="-name"]').value || "";
-    product.title =
-      formEl.querySelector('[id^="modal-"][id$="-title"]').value || "";
-    product.vendor =
-      formEl.querySelector('[id^="modal-"][id$="-vendor"]').value || "";
-    product.description =
-      formEl.querySelector('[id^="modal-"][id$="-desc"]').value || "";
-    product.in_stock =
-      parseInt(formEl.querySelector('[id^="modal-"][id$="-in-stock"]').value) ||
-      0;
-    product.sale_price =
-      parseInt(
-        formEl.querySelector('[id^="modal-"][id$="-sale-price"]').value
-      ) || 0;
-    product.product_type =
-      formEl.querySelector('[id^="modal-"][id$="-product-type"]').value || "";
-    product.product_location =
-      formEl.querySelector('[id^="modal-"][id$="-address"]').value || "";
-    product.buying_price =
-      parseInt(
-        formEl.querySelector('[id^="modal-"][id$="-buying-price"]').value
-      ) || 0;
-    product.purchase_quantity =
-      parseInt(
-        formEl.querySelector('[id^="modal-"][id$="-purchase-quantity"]').value
-      ) || 0;
-    product.shipping_rates =
-      parseInt(
-        formEl.querySelector('[id^="modal-"][id$="-shipping-rates"]').value
-      ) || 0;
-    product.refill_limit =
-      parseInt(
-        formEl.querySelector('[id^="modal-"][id$="-refill-limit"]').value
-      ) || 0;
+    product.name = formEl.querySelector('[id^="modal-"][id$="-name"]').value || "";
+    product.title = formEl.querySelector('[id^="modal-"][id$="-title"]').value || "";
+    product.vendor = formEl.querySelector('[id^="modal-"][id$="-vendor"]').value || "";
+    product.description = formEl.querySelector('[id^="modal-"][id$="-desc"]').value || "";
+    product.in_stock = parseInt(formEl.querySelector('[id^="modal-"][id$="-in-stock"]').value) || 0;
+    product.sale_price = parseInt(formEl.querySelector('[id^="modal-"][id$="-sale-price"]').value) || 0;
+    product.product_type = formEl.querySelector('[id^="modal-"][id$="-product-type"]').value || "";
+    product.product_location = formEl.querySelector('[id^="modal-"][id$="-address"]').value || "";
+    product.buying_price = parseInt(formEl.querySelector('[id^="modal-"][id$="-buying-price"]').value) || 0;
+    product.purchase_quantity = parseInt(formEl.querySelector('[id^="modal-"][id$="-purchase-quantity"]').value) || 0;
+    product.shipping_rates = parseInt(formEl.querySelector('[id^="modal-"][id$="-shipping-rates"]').value) || 0;
+    product.refill_limit = parseInt(formEl.querySelector('[id^="modal-"][id$="-refill-limit"]').value) || 0;
 
     return product;
   }
 
   // function to delete product
   deleteProduct(product_id) {
-    const updatedProducts = user.products.filter(
-      (prod) => prod.id !== product_id
-    );
+    const updatedProducts = user.products.filter((prod) => prod.id !== product_id);
     user.products = updatedProducts;
 
     User.updateLoggedInUser();
@@ -180,8 +142,7 @@ class DashboardProductsService {
     const dropdownContentDiv = document.createElement("div");
     dropdownContentDiv.classList.add("dropdown-content");
 
-    const { viewAnchor, editAnchor, deleteAnchor } =
-      this.#createActionAnchors(product);
+    const { viewAnchor, editAnchor, deleteAnchor } = this.#createActionAnchors(product);
 
     dropdownContentDiv.appendChild(viewAnchor);
     dropdownContentDiv.appendChild(editAnchor);
@@ -213,21 +174,9 @@ class DashboardProductsService {
 
   // function for creating action dropdown anchors
   #createActionAnchors(product) {
-    const viewAnchor = this.#createActionAnchorEl(
-      "View Product",
-      "viewProduct",
-      ["fa", "fa-eye"]
-    );
-    const editAnchor = this.#createActionAnchorEl(
-      "Edit Product",
-      "editProduct",
-      ["fa", "fa-edit"]
-    );
-    const deleteAnchor = this.#createActionAnchorEl(
-      "Delete Product",
-      "deleteProduct",
-      ["fa", "fa-trash"]
-    );
+    const viewAnchor = this.#createActionAnchorEl("View Product", "viewProduct", ["fa", "fa-eye"]);
+    const editAnchor = this.#createActionAnchorEl("Edit Product", "editProduct", ["fa", "fa-edit"]);
+    const deleteAnchor = this.#createActionAnchorEl("Delete Product", "deleteProduct", ["fa", "fa-trash"]);
 
     // event listeners for anchors
     const viewModalEl = document.getElementById("view-modal");
@@ -304,31 +253,18 @@ class DashboardProductsService {
 
   // function to add modal data
   #addModalData(modalEl, product, htmlAttr) {
-    modalEl.querySelector('[id^="modal-"][id$="-name"]')[htmlAttr] =
-      product.name;
-    modalEl.querySelector('[id^="modal-"][id$="-title"]')[htmlAttr] =
-      product.title;
-    modalEl.querySelector('[id^="modal-"][id$="-desc"]')[htmlAttr] =
-      product.description;
-    modalEl.querySelector('[id^="modal-"][id$="-vendor"]')[htmlAttr] =
-      product.vendor;
-    modalEl.querySelector('[id^="modal-"][id$="-in-stock"]')[htmlAttr] =
-      product.in_stock;
-    modalEl.querySelector('[id^="modal-"][id$="-sale-price"]')[htmlAttr] =
-      product.sale_price;
-    modalEl.querySelector('[id^="modal-"][id$="-product-type"]')[htmlAttr] =
-      product.product_type;
-    modalEl.querySelector('[id^="modal-"][id$="-address"]')[htmlAttr] =
-      product.product_location;
-    modalEl.querySelector('[id^="modal-"][id$="-buying-price"]')[htmlAttr] =
-      product.buying_price;
-    modalEl.querySelector('[id^="modal-"][id$="-purchase-quantity"]')[
-      htmlAttr
-    ] = product.purchase_quantity;
-    modalEl.querySelector('[id^="modal-"][id$="-shipping-rates"]')[htmlAttr] =
-      product.shipping_rates;
-    modalEl.querySelector('[id^="modal-"][id$="-refill-limit"]')[htmlAttr] =
-      product.refill_limit;
+    modalEl.querySelector('[id^="modal-"][id$="-name"]')[htmlAttr] = product.name;
+    modalEl.querySelector('[id^="modal-"][id$="-title"]')[htmlAttr] = product.title;
+    modalEl.querySelector('[id^="modal-"][id$="-desc"]')[htmlAttr] = product.description;
+    modalEl.querySelector('[id^="modal-"][id$="-vendor"]')[htmlAttr] = product.vendor;
+    modalEl.querySelector('[id^="modal-"][id$="-in-stock"]')[htmlAttr] = product.in_stock;
+    modalEl.querySelector('[id^="modal-"][id$="-sale-price"]')[htmlAttr] = product.sale_price;
+    modalEl.querySelector('[id^="modal-"][id$="-product-type"]')[htmlAttr] = product.product_type;
+    modalEl.querySelector('[id^="modal-"][id$="-address"]')[htmlAttr] = product.product_location;
+    modalEl.querySelector('[id^="modal-"][id$="-buying-price"]')[htmlAttr] = product.buying_price;
+    modalEl.querySelector('[id^="modal-"][id$="-purchase-quantity"]')[htmlAttr] = product.purchase_quantity;
+    modalEl.querySelector('[id^="modal-"][id$="-shipping-rates"]')[htmlAttr] = product.shipping_rates;
+    modalEl.querySelector('[id^="modal-"][id$="-refill-limit"]')[htmlAttr] = product.refill_limit;
   }
 
   // event listeners for cross button on all modals

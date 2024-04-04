@@ -7,24 +7,12 @@
 
     <script src="js/auth.js"></script>
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="css/sidebar.css" />
     <link rel="stylesheet" href="css/dashboard.css" />
@@ -116,10 +104,7 @@
           <div class="success-text">
             <p>Dummy Text</p>
             <a id="success-message-cross" style="cursor: pointer">
-              <i
-                class="fa fa-times"
-                style="font-size: 1.5rem; height: 1.5rem"
-              ></i>
+              <i class="fa fa-times" style="font-size: 1.5rem; height: 1.5rem"></i>
             </a>
           </div>
           <div class="progress-container">
@@ -147,43 +132,25 @@
               </select>
             </div>
             <div class="search">
-              <input
-                type="text"
-                id="search-text"
-                name="search-text"
-                placeholder="search..."
-              />
+              <input type="text" id="search-text" name="search-text" placeholder="search..." />
             </div>
           </div>
           <div class="toolbar-button-wrapper">
             <div class="custom-columns">
               <div class="columns-dropdown">
-                <button
-                  id="columns-dropdown-button"
-                  class="toolbar-button columns-dropdown-button"
-                >
-                  Custom Columns
-                </button>
+                <button id="columns-dropdown-button" class="toolbar-button columns-dropdown-button">Custom Columns</button>
                 <div class="columns-dropdown-content" style="display: none">
                   <p>Custom A</p>
                   <p class="custom-columns-last">Custom B</p>
                   <div style="text-align: center">
-                    <input
-                      type="text"
-                      id="custom-column-text"
-                      name="custom-column-text"
-                      placeholder="Enter column here..."
-                    />
+                    <input type="text" id="custom-column-text" name="custom-column-text" placeholder="Enter column here..." />
                     <div class="custom-column-error"></div>
                     <button class="columns-dropdown-submit">Submit</button>
                   </div>
                 </div>
               </div>
             </div>
-            <button
-              class="toolbar-button add-product-button"
-              id="add-product-toolbar"
-            >
+            <button class="toolbar-button add-product-button" id="add-product-toolbar">
               <span>Add Product</span>
               <i class="bx bx-plus-medical"></i>
             </button>
@@ -201,9 +168,7 @@
                 <th class="fixed-column"></th>
                 <th class="sortable" data-id="id">
                   <div class="sortable-wrapper">
-                    <span class="sortable-heading" onselectstart="return false;"
-                      >ID</span
-                    >
+                    <span class="sortable-heading" onselectstart="return false;">ID</span>
                     <span class="sort-arrows">
                       <i class="fa fa-caret-up arrow-up"></i>
                       <i class="fa fa-caret-down arrow-down"></i>
@@ -212,9 +177,7 @@
                 </th>
                 <th class="sortable" data-id="name">
                   <div class="sortable-wrapper">
-                    <span class="sortable-heading" onselectstart="return false;"
-                      >Name</span
-                    >
+                    <span class="sortable-heading" onselectstart="return false;">Name</span>
                     <span class="sort-arrows">
                       <i class="fa fa-caret-up arrow-up"></i>
                       <i class="fa fa-caret-down arrow-down"></i>
@@ -223,9 +186,7 @@
                 </th>
                 <th class="sortable" data-id="title">
                   <div class="sortable-wrapper">
-                    <span class="sortable-heading" onselectstart="return false;"
-                      >Title</span
-                    >
+                    <span class="sortable-heading" onselectstart="return false;">Title</span>
                     <span class="sort-arrows">
                       <i class="fa fa-caret-up arrow-up"></i>
                       <i class="fa fa-caret-down arrow-down"></i>
@@ -235,9 +196,7 @@
                 <th data-id="description">Description</th>
                 <th class="sortable" data-id="vendor">
                   <div class="sortable-wrapper">
-                    <span class="sortable-heading" onselectstart="return false;"
-                      >Vendor</span
-                    >
+                    <span class="sortable-heading" onselectstart="return false;">Vendor</span>
                     <span class="sort-arrows">
                       <i class="fa fa-caret-up arrow-up"></i>
                       <i class="fa fa-caret-down arrow-down"></i>
@@ -246,9 +205,7 @@
                 </th>
                 <th class="sortable" data-id="in_stock">
                   <div class="sortable-wrapper">
-                    <span class="sortable-heading" onselectstart="return false;"
-                      >In Stock</span
-                    >
+                    <span class="sortable-heading" onselectstart="return false;">In Stock</span>
                     <span class="sort-arrows">
                       <i class="fa fa-caret-up arrow-up"></i>
                       <i class="fa fa-caret-down arrow-down"></i>
@@ -257,9 +214,7 @@
                 </th>
                 <th class="sortable" data-id="buying_price">
                   <div class="sortable-wrapper">
-                    <span class="sortable-heading" onselectstart="return false;"
-                      >Buying Price</span
-                    >
+                    <span class="sortable-heading" onselectstart="return false;">Buying Price</span>
                     <span class="sort-arrows">
                       <i class="fa fa-caret-up arrow-up"></i>
                       <i class="fa fa-caret-down arrow-down"></i>
@@ -268,9 +223,7 @@
                 </th>
                 <th class="sortable" data-id="sale_price">
                   <div class="sortable-wrapper">
-                    <span class="sortable-heading" onselectstart="return false;"
-                      >Sale Price</span
-                    >
+                    <span class="sortable-heading" onselectstart="return false;">Sale Price</span>
                     <span class="sort-arrows">
                       <i class="fa fa-caret-up arrow-up"></i>
                       <i class="fa fa-caret-down arrow-down"></i>
@@ -279,9 +232,7 @@
                 </th>
                 <th class="sortable" data-id="purchase_quantity">
                   <div class="sortable-wrapper">
-                    <span class="sortable-heading" onselectstart="return false;"
-                      >Purchase Quantity</span
-                    >
+                    <span class="sortable-heading" onselectstart="return false;">Purchase Quantity</span>
                     <span class="sort-arrows">
                       <i class="fa fa-caret-up arrow-up"></i>
                       <i class="fa fa-caret-down arrow-down"></i>
@@ -290,9 +241,7 @@
                 </th>
                 <th class="sortable" data-id="product_type">
                   <div class="sortable-wrapper">
-                    <span class="sortable-heading" onselectstart="return false;"
-                      >Product Type</span
-                    >
+                    <span class="sortable-heading" onselectstart="return false;">Product Type</span>
                     <span class="sort-arrows">
                       <i class="fa fa-caret-up arrow-up"></i>
                       <i class="fa fa-caret-down arrow-down"></i>
@@ -301,9 +250,7 @@
                 </th>
                 <th class="sortable" data-id="shipping_rates">
                   <div class="sortable-wrapper">
-                    <span class="sortable-heading" onselectstart="return false;"
-                      >Shipping Rates</span
-                    >
+                    <span class="sortable-heading" onselectstart="return false;">Shipping Rates</span>
                     <span class="sort-arrows">
                       <i class="fa fa-caret-up arrow-up"></i>
                       <i class="fa fa-caret-down arrow-down"></i>
@@ -312,9 +259,7 @@
                 </th>
                 <th class="sortable" data-id="refill_limit">
                   <div class="sortable-wrapper">
-                    <span class="sortable-heading" onselectstart="return false;"
-                      >Refill Limit</span
-                    >
+                    <span class="sortable-heading" onselectstart="return false;">Refill Limit</span>
                     <span class="sort-arrows">
                       <i class="fa fa-caret-up arrow-up"></i>
                       <i class="fa fa-caret-down arrow-down"></i>
@@ -323,9 +268,7 @@
                 </th>
                 <th class="sortable" data-id="product_location">
                   <div class="sortable-wrapper">
-                    <span class="sortable-heading" onselectstart="return false;"
-                      >Address</span
-                    >
+                    <span class="sortable-heading" onselectstart="return false;">Address</span>
                     <span class="sort-arrows">
                       <i class="fa fa-caret-up arrow-up"></i>
                       <i class="fa fa-caret-down arrow-down"></i>
@@ -347,10 +290,7 @@
           <div class="modal-header">
             <h2>Add Product</h2>
             <a class="modal-close" data-id="add-modal">
-              <i
-                class="fa fa-times"
-                style="font-size: 1.5rem; height: 1.5rem"
-              ></i>
+              <i class="fa fa-times" style="font-size: 1.5rem; height: 1.5rem"></i>
             </a>
           </div>
           <div>
@@ -362,116 +302,56 @@
               </label>
               <label for="modal-add-title">
                 <span>Title</span>
-                <input
-                  type="text"
-                  id="modal-add-title"
-                  name="modal-add-title"
-                />
+                <input type="text" id="modal-add-title" name="modal-add-title" />
                 <p class="modal-error" id="modal-add-title-error"></p>
               </label>
               <label for="modal-add-desc" class="modal-desc-label">
                 <span>Description</span>
-                <textarea
-                  id="modal-add-desc"
-                  name="modal-add-desc"
-                  rows="5"
-                  maxlength="400"
-                >
-Enter description here...</textarea
-                >
+                <textarea id="modal-add-desc" name="modal-add-desc" rows="5" maxlength="400">Enter description here...</textarea>
                 <p class="modal-error" id="modal-add-desc-error"></p>
               </label>
               <label for="modal-add-vendor">
                 <span>Vendor</span>
-                <input
-                  type="text"
-                  id="modal-add-vendor"
-                  name="modal-add-vendor"
-                />
+                <input type="text" id="modal-add-vendor" name="modal-add-vendor" />
                 <p class="modal-error" id="modal-add-vendor-error"></p>
               </label>
               <label for="modal-add-product-type">
                 <span>Product Type</span>
-                <input
-                  type="text"
-                  id="modal-add-product-type"
-                  name="modal-add-product-type"
-                />
+                <input type="text" id="modal-add-product-type" name="modal-add-product-type" />
                 <p class="modal-error" id="modal-add-product-type-error"></p>
               </label>
               <label for="modal-add-address" class="modal-address-label">
                 <span>Address</span>
-                <input
-                  type="text"
-                  id="modal-add-address"
-                  name="modal-add-address"
-                />
+                <input type="text" id="modal-add-address" name="modal-add-address" />
                 <p class="modal-error" id="modal-add-address-error"></p>
               </label>
               <label for="modal-add-in-stock">
                 <span>In Stock</span>
-                <input
-                  type="number"
-                  id="modal-add-in-stock"
-                  name="modal-add-in-stock"
-                  min="0"
-                />
+                <input type="number" id="modal-add-in-stock" name="modal-add-in-stock" min="0" />
               </label>
               <label for="modal-add-buying-price">
                 <span>Buying Price</span>
-                <input
-                  type="number"
-                  id="modal-add-buying-price"
-                  name="modal-add-buying-price"
-                  min="0"
-                />
+                <input type="number" id="modal-add-buying-price" name="modal-add-buying-price" min="0" />
               </label>
               <label for="modal-add-sale-price">
                 <span>Sale Price</span>
-                <input
-                  type="number"
-                  id="modal-add-sale-price"
-                  name="modal-add-sale-price"
-                  min="0"
-                />
+                <input type="number" id="modal-add-sale-price" name="modal-add-sale-price" min="0" />
               </label>
               <label for="modal-add-purchase-quantity">
                 <span>Purchase Quantity</span>
-                <input
-                  type="number"
-                  id="modal-add-purchase-quantity"
-                  name="modal-add-purchase-quantity"
-                  min="0"
-                />
+                <input type="number" id="modal-add-purchase-quantity" name="modal-add-purchase-quantity" min="0" />
               </label>
               <label for="modal-add-shipping-rates">
                 <span>Shipping Rates</span>
-                <input
-                  type="number"
-                  id="modal-add-shipping-rates"
-                  name="modal-add-shipping-rates"
-                  min="0"
-                />
+                <input type="number" id="modal-add-shipping-rates" name="modal-add-shipping-rates" min="0" />
               </label>
               <label for="modal-add-refill-limit">
                 <span>Refill Limit</span>
-                <input
-                  type="number"
-                  id="modal-add-refill-limit"
-                  name="modal-add-refill-limit"
-                  min="0"
-                />
+                <input type="number" id="modal-add-refill-limit" name="modal-add-refill-limit" min="0" />
               </label>
 
               <div class="modal-buttons">
-                <button
-                  type="button"
-                  class="cancel"
-                  formmethod="dialog"
-                  id="add-close-button"
-                >
-                  Cancel
-                </button>
+                <button type="button" class="cancel" formmethod="dialog" id="add-close-button">Cancel</button>
                 <button type="submit" class="submit">Submit</button>
               </div>
             </form>
@@ -482,10 +362,7 @@ Enter description here...</textarea
           <div class="modal-header">
             <h2>Product Details</h2>
             <button class="modal-close" data-id="view-modal">
-              <i
-                class="fa fa-times"
-                style="font-size: 1.5rem; height: 1.5rem"
-              ></i>
+              <i class="fa fa-times" style="font-size: 1.5rem; height: 1.5rem"></i>
             </button>
           </div>
           <div class="view-container">
@@ -548,132 +425,68 @@ Enter description here...</textarea
           <div class="modal-header">
             <h2>Edit Product</h2>
             <a class="modal-close" data-id="edit-modal">
-              <i
-                class="fa fa-times"
-                style="font-size: 1.5rem; height: 1.5rem"
-              ></i>
+              <i class="fa fa-times" style="font-size: 1.5rem; height: 1.5rem"></i>
             </a>
           </div>
           <div>
             <form class="modal-form" id="modal-edit-form" method="post">
               <label for="modal-edit-name">
                 <span>Name</span>
-                <input
-                  type="text"
-                  id="modal-edit-name"
-                  name="modal-edit-name"
-                />
+                <input type="text" id="modal-edit-name" name="modal-edit-name" />
                 <p class="modal-error" id="modal-edit-name-error"></p>
               </label>
               <label for="modal-edit-title">
                 <span>Title</span>
-                <input
-                  type="text"
-                  id="modal-edit-title"
-                  name="modal-edit-title"
-                />
+                <input type="text" id="modal-edit-title" name="modal-edit-title" />
                 <p class="modal-error" id="modal-edit-title-error"></p>
               </label>
               <label for="modal-edit-desc" class="modal-desc-label">
                 <span>Description</span>
-                <textarea
-                  id="modal-edit-desc"
-                  name="modal-edit-desc"
-                  rows="5"
-                ></textarea>
+                <textarea id="modal-edit-desc" name="modal-edit-desc" rows="5"></textarea>
                 <p class="modal-error" id="modal-edit-desc-error"></p>
               </label>
               <label for="modal-edit-vendor">
                 <span>Vendor</span>
-                <input
-                  type="text"
-                  id="modal-edit-vendor"
-                  name="modal-edit-vendor"
-                />
+                <input type="text" id="modal-edit-vendor" name="modal-edit-vendor" />
                 <p class="modal-error" id="modal-edit-vendor-error"></p>
               </label>
               <label for="modal-edit-product-type">
                 <span>Product Type</span>
-                <input
-                  type="text"
-                  id="modal-edit-product-type"
-                  name="modal-edit-product-type"
-                />
+                <input type="text" id="modal-edit-product-type" name="modal-edit-product-type" />
                 <p class="modal-error" id="modal-edit-product-type-error"></p>
               </label>
               <label for="modal-edit-address" class="modal-address-label">
                 <span>Address</span>
-                <input
-                  type="text"
-                  id="modal-edit-address"
-                  name="modal-edit-address"
-                />
+                <input type="text" id="modal-edit-address" name="modal-edit-address" />
                 <p class="modal-error" id="modal-edit-address-error"></p>
               </label>
               <label for="modal-edit-in-stock">
                 <span>In Stock</span>
-                <input
-                  type="number"
-                  id="modal-edit-in-stock"
-                  name="modal-edit-in-stock"
-                  min="0"
-                />
+                <input type="number" id="modal-edit-in-stock" name="modal-edit-in-stock" min="0" />
               </label>
               <label for="modal-edit-buying-price">
                 <span>Buying Price</span>
-                <input
-                  type="number"
-                  id="modal-edit-buying-price"
-                  name="modal-edit-buying-price"
-                  min="0"
-                />
+                <input type="number" id="modal-edit-buying-price" name="modal-edit-buying-price" min="0" />
               </label>
               <label for="modal-edit-sale-price">
                 <span>Sale Price</span>
-                <input
-                  type="number"
-                  id="modal-edit-sale-price"
-                  name="modal-edit-sale-price"
-                  min="0"
-                />
+                <input type="number" id="modal-edit-sale-price" name="modal-edit-sale-price" min="0" />
               </label>
               <label for="modal-edit-purchase-quantity">
                 <span>Purchase Quantity</span>
-                <input
-                  type="number"
-                  id="modal-edit-purchase-quantity"
-                  name="modal-edit-purchase-quantity"
-                  min="0"
-                />
+                <input type="number" id="modal-edit-purchase-quantity" name="modal-edit-purchase-quantity" min="0" />
               </label>
               <label for="modal-edit-shipping-rates">
                 <span>Shipping Rates</span>
-                <input
-                  type="number"
-                  id="modal-edit-shipping-rates"
-                  name="modal-edit-shipping-rates"
-                  min="0"
-                />
+                <input type="number" id="modal-edit-shipping-rates" name="modal-edit-shipping-rates" min="0" />
               </label>
               <label for="modal-edit-refill-limit">
                 <span>Refill Limit</span>
-                <input
-                  type="number"
-                  id="modal-edit-refill-limit"
-                  name="modal-edit-refill-limit"
-                  min="0"
-                />
+                <input type="number" id="modal-edit-refill-limit" name="modal-edit-refill-limit" min="0" />
               </label>
 
               <div class="modal-buttons">
-                <button
-                  type="button"
-                  class="cancel"
-                  formmethod="dialog"
-                  id="edit-close-button"
-                >
-                  Cancel
-                </button>
+                <button type="button" class="cancel" formmethod="dialog" id="edit-close-button">Cancel</button>
                 <button type="submit" class="submit">Submit</button>
               </div>
             </form>

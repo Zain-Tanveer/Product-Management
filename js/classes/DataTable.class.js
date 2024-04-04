@@ -56,8 +56,7 @@ class DataTable {
       });
 
       // this check is for adding 'null' in row data if a column is added dynamically
-      const lengthDiff =
-        dashboardProductsService.checkLengthDifference(product);
+      const lengthDiff = dashboardProductsService.checkLengthDifference(product);
       if (lengthDiff) {
         for (let i = 0; i < lengthDiff; i++) {
           const customTd = dashboardProductsService.createTd("null");
@@ -95,10 +94,7 @@ class DataTable {
   // this function will run when submit is clicked
   // on Add Product modal
   addProduct(formEl) {
-    const newProduct = dashboardProductsService.getProduct(
-      formEl,
-      this.#getNewProductId()
-    );
+    const newProduct = dashboardProductsService.getProduct(formEl, this.#getNewProductId());
     user.products.push(newProduct);
 
     User.updateLoggedInUser();
@@ -187,14 +183,10 @@ class DataTable {
       checkbox.addEventListener("change", () => {
         const product_id = checkbox.dataset.id.split("-")[1]; // checkbox id example : data-id = "selectbox-0"
         if (checkbox.checked) {
-          this.checkboxProducts.push(
-            user.products.find((product) => product.id === parseInt(product_id))
-          );
+          this.checkboxProducts.push(user.products.find((product) => product.id === parseInt(product_id)));
           this.renderSelectProducts();
         } else {
-          this.checkboxProducts = this.checkboxProducts.filter(
-            (product) => product.id !== parseInt(product_id)
-          );
+          this.checkboxProducts = this.checkboxProducts.filter((product) => product.id !== parseInt(product_id));
           this.renderSelectProducts();
         }
       });
@@ -212,9 +204,7 @@ class DataTable {
       if (searchValue !== "") {
         const filterProducts = user.products.filter((product) => {
           if (typeof product[filterBy] === "string") {
-            return product[filterBy]
-              .toLowerCase()
-              .includes(searchValue.toLowerCase());
+            return product[filterBy].toLowerCase().includes(searchValue.toLowerCase());
           } else {
             return product[filterBy].toString().includes(searchValue);
           }
@@ -233,12 +223,8 @@ class DataTable {
 
   // function to add custom columns event listener
   addCustomColumnsEventListeners(tableEl, tableBody) {
-    const customColumnsButtonEl = document.querySelector(
-      ".columns-dropdown-button"
-    );
-    const customColumnsDropdownEl = document.querySelector(
-      ".columns-dropdown-content"
-    );
+    const customColumnsButtonEl = document.querySelector(".columns-dropdown-button");
+    const customColumnsDropdownEl = document.querySelector(".columns-dropdown-content");
 
     customColumnsButtonEl.addEventListener("click", () => {
       if (customColumnsDropdownEl.style.display === "none") {
@@ -252,54 +238,35 @@ class DataTable {
 
     customColumnsDropdownEl.querySelectorAll("p").forEach((p) => {
       p.addEventListener("click", () => {
-        dashboardProductsService.addCustomHeader(
-          p.textContent,
-          tableEl,
-          tableBody
-        );
+        dashboardProductsService.addCustomHeader(p.textContent, tableEl, tableBody);
 
-        dashboardService.toggleSuccessMessage(
-          `'${p.textContent}' column added!`
-        );
+        dashboardService.toggleSuccessMessage(`'${p.textContent}' column added!`);
 
         customColumnsDropdownEl.style.display = "none";
         customColumnsButtonEl.classList.remove("columns-dropdown-button-hover");
       });
     });
 
-    customColumnsDropdownEl
-      .querySelector(".columns-dropdown-submit")
-      .addEventListener("click", () => {
-        const pattern = /^[A-Za-z\s]+$/;
-        const customColumnText =
-          customColumnsDropdownEl.querySelector("input").value;
+    customColumnsDropdownEl.querySelector(".columns-dropdown-submit").addEventListener("click", () => {
+      const pattern = /^[A-Za-z\s]+$/;
+      const customColumnText = customColumnsDropdownEl.querySelector("input").value;
 
-        const customColumnError = customColumnsDropdownEl.querySelector(
-          ".custom-column-error"
-        );
+      const customColumnError = customColumnsDropdownEl.querySelector(".custom-column-error");
 
-        if (customColumnText.length === 0) {
-          customColumnError.innerHTML = "please enter a name";
-        } else if (!pattern.test(customColumnText)) {
-          customColumnError.innerHTML = "name should only have alphabets";
-        } else {
-          dashboardProductsService.addCustomHeader(
-            customColumnText,
-            tableEl,
-            tableBody
-          );
+      if (customColumnText.length === 0) {
+        customColumnError.innerHTML = "please enter a name";
+      } else if (!pattern.test(customColumnText)) {
+        customColumnError.innerHTML = "name should only have alphabets";
+      } else {
+        dashboardProductsService.addCustomHeader(customColumnText, tableEl, tableBody);
 
-          dashboardService.toggleSuccessMessage(
-            `'${customColumnText}' column added!`
-          );
+        dashboardService.toggleSuccessMessage(`'${customColumnText}' column added!`);
 
-          customColumnError.innerHTML = "";
-          customColumnsDropdownEl.style.display = "none";
-          customColumnsButtonEl.classList.remove(
-            "columns-dropdown-button-hover"
-          );
-        }
-      });
+        customColumnError.innerHTML = "";
+        customColumnsDropdownEl.style.display = "none";
+        customColumnsButtonEl.classList.remove("columns-dropdown-button-hover");
+      }
+    });
   }
 
   // function for adding event listener on add modal
@@ -312,11 +279,9 @@ class DataTable {
       addProductModal.close();
     });
 
-    document
-      .querySelector("#add-product-toolbar")
-      .addEventListener("click", () => {
-        addProductModal.showModal();
-      });
+    document.querySelector("#add-product-toolbar").addEventListener("click", () => {
+      addProductModal.showModal();
+    });
 
     formEl.addEventListener("submit", (e) => {
       e.preventDefault();

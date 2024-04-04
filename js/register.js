@@ -24,11 +24,7 @@ formEl.addEventListener("submit", (e) => {
   const email = emailEl.value;
   const password = passwordEl.value;
 
-  const isError = AuthService.validateRegisterFormInputs(
-    username,
-    email,
-    password
-  );
+  const isError = AuthService.validateRegisterFormInputs(username, email, password);
 
   if (isError) {
     return;

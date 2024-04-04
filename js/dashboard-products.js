@@ -45,9 +45,7 @@ editFormEl.addEventListener("submit", (e) => {
 // event listener for delete button on delete modal
 const deleteDeleteButton = deleteModalEl.querySelector("#delete-delete-button");
 deleteDeleteButton.addEventListener("click", () => {
-  dashboardProductsService.deleteProduct(
-    parseInt(deleteModalEl.dataset.productId)
-  );
+  dashboardProductsService.deleteProduct(parseInt(deleteModalEl.dataset.productId));
   table.renderTable();
   deleteModalEl.close();
 });
