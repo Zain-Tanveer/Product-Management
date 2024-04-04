@@ -32,12 +32,12 @@ formEl.addEventListener("submit", (e) => {
 
   const user = users.find((user) => user.email === email);
   if (!user) {
-    AuthService.toggleErrorMessage("User not found!");
+    AuthService.toggleResponseMessage("User not found!", "error");
     return;
   }
 
   if (password !== user.password) {
-    AuthService.toggleErrorMessage("Incorrect user password!");
+    AuthService.toggleResponseMessage("Incorrect user password!", "error");
     return;
   }
 
@@ -46,7 +46,7 @@ formEl.addEventListener("submit", (e) => {
   emailEl.value = "";
   passwordEl.value = "";
 
-  AuthService.toggleSuccessMessage("Login successful!", 1000);
+  AuthService.toggleResponseMessage("Login successful!", "success", 1000);
 
   setTimeout(() => {
     window.location.href = "dashboard.html";

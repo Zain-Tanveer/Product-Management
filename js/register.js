@@ -32,7 +32,7 @@ formEl.addEventListener("submit", (e) => {
 
   const isRegistered = users.find((user) => user.email === email);
   if (isRegistered) {
-    AuthService.toggleErrorMessage("User already exists");
+    AuthService.toggleResponseMessage("User already exists", "error");
     return;
   }
 
@@ -45,7 +45,7 @@ formEl.addEventListener("submit", (e) => {
   emailEl.value = "";
   passwordEl.value = "";
 
-  AuthService.toggleSuccessMessage("Registration successful!");
+  AuthService.toggleResponseMessage("Registration successful!", "success");
 
   setTimeout(() => {
     window.location.href = "index.html";

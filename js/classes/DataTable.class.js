@@ -33,6 +33,7 @@ class DataTable {
     // check if user has no products
     dashboardProductsService.checkNoProducts(user.products);
 
+    // this for loop will only run if user has products
     for (let [index, product] of products.entries()) {
       let tr = document.createElement("tr");
       const checkboxEl = dashboardProductsService.createCheckbox(product.id);
@@ -226,32 +227,46 @@ class DataTable {
     const customColumnsButtonEl = document.querySelector(".columns-dropdown-button");
     const customColumnsDropdownEl = document.querySelector(".columns-dropdown-content");
 
-    customColumnsButtonEl.addEventListener("click", () => {
-      if (customColumnsDropdownEl.style.display === "none") {
-        customColumnsDropdownEl.style.display = "block";
-        customColumnsButtonEl.classList.add("columns-dropdown-button-hover");
+    DataTable.#addCustomColumnsButtonEventListener(customColumnsButtonEl, customColumnsDropdownEl);
+    DataTable.#addCustomColumnsPEventListeners(customColumnsDropdownEl, customColumnsButtonEl, tableEl, tableBody);
+    DataTable.#addCustomColumnsUserEventListener(customColumnsDropdownEl, customColumnsButtonEl, tableEl, tableBody);
+  }
+
+  // function to add event listener on custom columns button.
+  // it will change the styling of custom columns dropdown
+  static #addCustomColumnsButtonEventListener(buttonEl, dropdownEl) {
+    buttonEl.addEventListener("click", () => {
+      if (dropdownEl.style.display === "none") {
+        dropdownEl.style.display = "block";
+        buttonEl.classList.add("columns-dropdown-button-hover");
       } else {
-        customColumnsDropdownEl.style.display = "none";
-        customColumnsButtonEl.classList.remove("columns-dropdown-button-hover");
+        dropdownEl.style.display = "none";
+        buttonEl.classList.remove("columns-dropdown-button-hover");
       }
     });
+  }
 
-    customColumnsDropdownEl.querySelectorAll("p").forEach((p) => {
+  // function to add event listeners on pre defined custom columns in the dropdown.
+  static #addCustomColumnsPEventListeners(dropdownEl, buttonEl, tableEl, tableBody) {
+    dropdownEl.querySelectorAll("p").forEach((p) => {
       p.addEventListener("click", () => {
         dashboardProductsService.addCustomHeader(p.textContent, tableEl, tableBody);
-
         dashboardService.toggleSuccessMessage(`'${p.textContent}' column added!`);
 
-        customColumnsDropdownEl.style.display = "none";
-        customColumnsButtonEl.classList.remove("columns-dropdown-button-hover");
+        dropdownEl.style.display = "none";
+        buttonEl.classList.remove("columns-dropdown-button-hover");
       });
     });
+  }
 
-    customColumnsDropdownEl.querySelector(".columns-dropdown-submit").addEventListener("click", () => {
+  // function to add event listener on submit button of custom columns dropdown form.
+  // it will handle all of the functionality after user submits a user entered column
+  static #addCustomColumnsUserEventListener(dropdownEl, buttonEl, tableEl, tableBody) {
+    dropdownEl.querySelector(".columns-dropdown-submit").addEventListener("click", () => {
       const pattern = /^[A-Za-z\s]+$/;
-      const customColumnText = customColumnsDropdownEl.querySelector("input").value;
+      const customColumnText = dropdownEl.querySelector("input").value;
 
-      const customColumnError = customColumnsDropdownEl.querySelector(".custom-column-error");
+      const customColumnError = dropdownEl.querySelector(".custom-column-error");
 
       if (customColumnText.length === 0) {
         customColumnError.innerHTML = "please enter a name";
@@ -259,12 +274,11 @@ class DataTable {
         customColumnError.innerHTML = "name should only have alphabets";
       } else {
         dashboardProductsService.addCustomHeader(customColumnText, tableEl, tableBody);
-
         dashboardService.toggleSuccessMessage(`'${customColumnText}' column added!`);
 
         customColumnError.innerHTML = "";
-        customColumnsDropdownEl.style.display = "none";
-        customColumnsButtonEl.classList.remove("columns-dropdown-button-hover");
+        dropdownEl.style.display = "none";
+        buttonEl.classList.remove("columns-dropdown-button-hover");
       }
     });
   }

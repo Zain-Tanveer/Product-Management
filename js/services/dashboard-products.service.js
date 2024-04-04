@@ -251,7 +251,7 @@ class DashboardProductsService {
     return td;
   }
 
-  // function to add modal data
+  // function to add modal data on view/edit modals
   #addModalData(modalEl, product, htmlAttr) {
     modalEl.querySelector('[id^="modal-"][id$="-name"]')[htmlAttr] = product.name;
     modalEl.querySelector('[id^="modal-"][id$="-title"]')[htmlAttr] = product.title;
